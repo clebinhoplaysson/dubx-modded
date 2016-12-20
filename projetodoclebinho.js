@@ -2008,7 +2008,8 @@ if (!hello_run && Dubtrack.session.id) {
             return Dubtrack.helpers.isDubtrackAdmin(userid) ||
                     Dubtrack.room.users.getIfOwner(userid) ||
                     Dubtrack.room.users.getIfManager(userid) ||
-                    Dubtrack.room.users.getIfMod(userid);
+                    Dubtrack.room.users.getIfMod(userid) ||
+                    Dubtrack.room.users.getIfDefault(userid);
         },
         updateChatInputWithString: function(str){
             $("#chat-txt-message").val(str).focus();
