@@ -1417,7 +1417,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.option('downdub_chat', 'true');
                 hello.on('.downdub_chat');
 
-                if(!hello.userIsAtLeastDefault(Dubtrack.session.id)) return;
+                if(!hello.userIsAtLeastUser(Dubtrack.session.id)) return;
 
                 Dubtrack.Events.bind("realtime:room_playlist-dub", this.downdubWatcher);
             }
@@ -1574,7 +1574,7 @@ if (!hello_run && Dubtrack.session.id) {
                 });*/
 
                 //Only let mods or higher access down dubs
-                if(hello.userIsAtLeastDefault(Dubtrack.session.id)){
+                if(hello.userIsAtLeastUser(Dubtrack.session.id)){
                     response.data.downDubs.forEach(function(e){
                         //Dub already casted
                         if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.userid; }).length > 0){
@@ -1752,7 +1752,7 @@ if (!hello_run && Dubtrack.session.id) {
                     var dubdownBackground = $('.dubdown').hasClass('voted') ? $('.dubdown').css('background-color') : $('.dubdown').find('.icon-arrow-down').css('color');
                     var html;
 
-                    if(hello.userIsAtLeastDefault(Dubtrack.session.id)){
+                    if(hello.userIsAtLeastUser(Dubtrack.session.id)){
                         if(hello.dubs.downDubs.length > 0){
                             html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover" style="border-color: '+dubdownBackground+'">';
                             hello.dubs.downDubs.forEach(function(val){
@@ -1968,7 +1968,7 @@ if (!hello_run && Dubtrack.session.id) {
             }
             else if(e.dubtype === 'downdub'){
                 //If dub already casted
-                if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length <= 0 && hello.userIsAtLeastDefault(Dubtrack.session.id)){
+                if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length <= 0 && hello.userIsAtLeastUser(Dubtrack.session.id)){
                     hello.dubs.downDubs.push({
                         userid: e.user._id,
                         username: e.user.username
@@ -1993,7 +1993,7 @@ if (!hello_run && Dubtrack.session.id) {
                 // console.log("Updubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
-            else if(hello.userIsAtLeastDefault(Dubtrack.session.id) && hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs){
+            else if(hello.userIsAtLeastUser(Dubtrack.session.id) && hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs){
                 // console.log("Downdubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
@@ -2004,12 +2004,12 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.resetDubs();
             }*/
         },
-        userIsAtLeastDefault: function(userid){
+        userIsAtLeastUser: function(userid){
             return Dubtrack.helpers.isDubtrackAdmin(userid) ||
                     Dubtrack.room.users.getIfOwner(userid) ||
                     Dubtrack.room.users.getIfManager(userid) ||
                     Dubtrack.room.users.getIfMod(userid) ||
-                    Dubtrack.room.users.getIfDefault(userid);
+                    Dubtrack.room.users.getIfUser(userid);
         },
         updateChatInputWithString: function(str){
             $("#chat-txt-message").val(str).focus();
