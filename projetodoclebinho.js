@@ -14,7 +14,7 @@
     a. You must include this license document in the distribution.
     b. You must ensure that all recipients of the machine-executable forms are also able to receive the complete machine-readable source code to the distributed Software, including all modifications, without any charge beyond the costs of data transfer, and place prominent notices in the distribution explaining this.
     c. You must ensure that all modifications included in the machine-executable forms are available under the terms of this license.
-    5. You may use the original or modified versions of the Software to compile, link and run application programs legally developed by you or by others.
+    5. You may use the original or modified versions of the Software to c[ompile, link and run application programs legally developed by you or by others.
     6. You may develop application programs, reusable components and other software items that link with the original or modified versions of the Software. These items, when distributed, are subject to the following requirements:
     a. You must ensure that all recipients of machine-executable forms of these items are also able to receive and use the complete machine-readable source code to the items without any charge beyond the costs of data transfer.
     b. You must explicitly license all recipients of your items to use and re-distribute original and modified versions of the items in both machine-executable and source code forms. The recipients must be able to do so without any charges whatsoever, and they must be able to re-distribute to anyone they choose.
@@ -557,9 +557,9 @@ if (!hello_run && Dubtrack.session.id) {
                 if (options.let_active_afk) {
                     if (localStorage.getItem('customAfkMessage')) {
                         var customAfkMessage = localStorage.getItem('customAfkMessage');
-                        $('#chat-txt-message').val('[AFK] '+customAfkMessage);
+                        $('#chat-txt-message').val(customAfkMessage);
                     } else {
-                        $('#chat-txt-message').val("[AFK] I'm not here right now.");
+                        $('#chat-txt-message').val("I'm not here right now.");
                     }
                     Dubtrack.room.chat.sendMessage();
                     options.let_active_afk = false;
